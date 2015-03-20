@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+    <div id="cpu_temp" class="200x160px"></div>
+    <script>
+        var g1 = new JustGage({
+            id: "cpu_temp",
+	    value: {{ CPU_temp }},
+            min: 0,
+	    max: 200,
+            title: "CPU Temp (F)"
+          });
+    </script>
+    </div>
+
+    <div class="col-md-3">
+    <div id="cpu_perc" class="200x160px"></div>
+    <script>
+        var g2 = new JustGage({
+            id: "cpu_perc",
+	    value: {{ CPU_usage }},
+            min: 0,
+	    max: 100,
+            title: "CPU Usage (%)"
+          });
+    </script>
+    </div>
+
+    <div class="col-md-3">
+    <div id="ram_perc" class="200x160px"></div>
+    <script>
+        var g3 = new JustGage({
+            id: "ram_perc",
+	    value: {{ RAM_perc }},
+            min: 0,
+	    max: 100,
+            title: "RAM Usage (%)"
+          });
+    </script>
+    </div>
+
+    <div class="col-md-3">
+    <div id="disk_perc" class="200x160px"></div>
+    <script>
+        var g4 = new JustGage({
+            id: "disk_perc",
+	    value: {{ DISK_perc }},
+            min: 0,
+	    max: 100,
+            title: "DISK Usage (%)"
+          });
+    </script>
+    </div>
+  </div>
+</div>
+{% endblock %}

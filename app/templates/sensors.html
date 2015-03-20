@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="starter-template">
+    <h1>Current Readings</h1>
+    <p class="lead">Temperature (F): {{ DHT_temp }} - Humidity (%): {{ DHT_hum }}</p>
+    <p class="lead">Visible Light: {{ vis }} - Infrared: {{ IR }} - UV Index: {{ UV }}</p>
+    <h1>Last 7 Days</h1>
+</div>
+<div id="temp_chart"</div>
+<script>
+var chart = c3.generate({
+        bindto: '#temp_chart',
+    data: {
+        x: 'x',
+        xFormat:'%Y-%m-%d %H:%M:%S',
+        columns: [
+            {{ temp_x|tojson|safe }},
+            {{ temp_y|tojson|safe }}
+        ]
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+		count: 7,
+                format: '%Y-%m-%d'
+            }
+        }
+    }
+});
+</script>
+
+<div id="hum_chart"</div>
+<script>
+var chart = c3.generate({
+        bindto: '#hum_chart',
+    data: {
+        x: 'x',
+        xFormat:'%Y-%m-%d %H:%M:%S',
+        columns: [
+            {{ hum_x|tojson|safe }},
+            {{ hum_y|tojson|safe }}
+        ]
+    },
+    color: {
+        pattern: ['#ff7f0e']
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+		count: 7,
+                format: '%Y-%m-%d'
+            }
+        }
+    }
+});
+</script>
+</div>
+{% endblock %}
