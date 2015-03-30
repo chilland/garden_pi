@@ -5,7 +5,7 @@ import sqlite3
 import time
 import utilities
 
-dbname='/home/pi/Desktop/dashboard/sensorlog.db'
+dbname='/home/pi/Desktop/garden_pi/sensorlog.db'
 
 def main():
     DHT_hum, DHT_temp = utilities.get_DHT()

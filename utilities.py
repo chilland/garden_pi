@@ -114,32 +114,5 @@ def create_hum(rows):
     for row in rows:
         x_axis.append(str(row[0]))
         y_axis.append(float(row[2]))
-    return x_axis, y_axis
 
-def create_vis(rows):
-    x_axis = ['x']
-    y_axis = ['Visible Light']
-
-    for row in rows:
-        x_axis.append(str(row[0]))
-        y_axis.append(float(row[3]))
-
-    return x_axis, y_axis
-
-def create_ir(rows):
-    x_axis = ['x']
-    y_axis = ['Infrared Light']
-
-    for row in rows:
-        x_axis.append(str(row[0]))
-        y_axis.append(float(row[4]))
-    return x_axis, y_axis
-
-def create_uv(rows):
-    x_axis = ['x']
-    y_axis = ['UV Index']
-
-    for row in rows:
-        x_axis.append(str(row[0]))
-        y_axis.append(float(row[5]))
     return x_axis, y_axis

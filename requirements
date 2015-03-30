@@ -1,0 +1,7 @@
+flask
+sqlite3
+i2c-tools
+python-smbus
+python-rpi.gpio
+Adafruit_Python_GPIO
+Adafruit_Python_DHT

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="starter-template">
+    <h1>Current Readings</h1>
+    <p class="lead">Visible Light: {{ vis }} - Infrared Light: {{ IR }} - UV Index: {{ UV }}</p>
+    <h1>Last 7 Days</h1>
+</div>
+<div id="vis_ir_chart"</div>
+<script>
+var chart = c3.generate({
+        bindto: '#vis_ir_chart',
+    data: {
+        x: 'x',
+        xFormat:'%Y-%m-%d %H:%M:%S',
+        columns: [
+            {{ ir_x|tojson|safe }},
+            {{ ir_y|tojson|safe }},
+            {{ vis_y|tojson|safe }}
+        ]
+    },
+    point: {
+	show: false
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+		count: 7,
+                format: '%Y-%m-%d %H:%M:%S'
+            }
+        }
+    }
+});
+</script>
+
+<div id="uv_chart"</div>
+<script>
+var chart = c3.generate({
+        bindto: '#uv_chart',
+    data: {
+        x: 'x',
+        xFormat:'%Y-%m-%d %H:%M:%S',
+        columns: [
+            {{ uv_x|tojson|safe }},
+            {{ uv_y|tojson|safe }}
+        ]
+    },
+    point: {
+	show: false
+    },
+    color: {
+        pattern: ['#2ca02c']
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+		count: 7,
+                format: '%Y-%m-%d %H:%M:%S'
+            }
+        }
+    }
+});
+</script>
+</div>
+{% endblock %}
