@@ -32,31 +32,34 @@ def temp_hum():
     interval='168'
     DHT_hum, DHT_temp = utilities.get_DHT()
     rows = utilities.get_data(dbname, interval)
-    temp_x, temp_y = utilities.create_temp(rows)
-    hum_x, hum_y = utilities.create_hum(rows)
+    temp_y = utilities.create_yaxis(rows, 'Temperature (F)', 1)
+    hum_y = utilities.create_yaxis(rows, 'Humidity (%)', 2)
+    dates = utilities.create_xaxis(rows)
     return render_template('temp-hum.html', 
                             DHT_temp=round(DHT_temp,1),
                             DHT_hum=round(DHT_hum,1), 
-                            temp_x=temp_x,
+                            temp_x=dates,
 			    temp_y=temp_y,
-			    hum_x=hum_x,
+			    hum_x=dates,
                             hum_y=hum_y)
 
 @app.route('/light')
 def light():
-   dbname='/home/pi/Desktop/garden_pi/sensorlog.db'
-   interval='168'
-   rows = utilities.get_data(dbname, interval)
-   vis, IR, UV = utilities.get_light()
-   vis_x, vis_y = utilities.create_vis(rows)
-   ir_x, ir_y = utilities.create_ir(rows)
-   uv_x, uv_y = utilities.create_uv(rows) 
-   return render_template('light.html', 
+    dbname='/home/pi/Desktop/garden_pi/sensorlog.db'
+    interval='168'
+    rows = utilities.get_data(dbname, interval)
+    vis, IR, UV = utilities.get_light()
+    vis_y = utilities.create_yaxis(rows, 'Visible Light', 3)
+    ir_y = utilities.create_yaxis(rows, 'Infared Light', 4)
+    uv_y = utilities.create_yaxis(rows, 'UV Index', 5)
+    dates = utilities.create_xaxis(rows)
+
+    return render_template('light.html', 
                             vis=vis,
                             IR=IR,
                             UV=UV,
-                            ir_x=ir_x,
+                            ir_x=dates,
                             ir_y=ir_y,
                             vis_y=vis_y,
-                            uv_x=uv_x,
+                            uv_x=dates,
                             uv_y=uv_y)
